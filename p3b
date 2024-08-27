@@ -1,0 +1,44 @@
+import math
+
+def mortgage_calculator(principal, annual_rate, years, compounding='monthly'):
+    
+    annual_rate_decimal = annual_rate / 100
+    
+    
+    months = years * 12
+    
+    if compounding == 'monthly':
+        rate = annual_rate_decimal / 12
+        payment = principal * rate * (1 + rate)**months / ((1 + rate)**months - 1)
+    elif compounding == 'weekly':
+        weeks = years * 52
+        rate = annual_rate_decimal / 52
+        payment = principal * rate * (1 + rate)**weeks / ((1 + rate)**weeks - 1)
+        payment = payment * 52 / 12
+    elif compounding == 'daily':
+        days = years * 365
+        rate = annual_rate_decimal / 365
+        payment = principal * rate * (1 + rate)**days / ((1 + rate)**days - 1)
+        payment = payment * 365 / 12
+    elif compounding == 'continuously':
+        effective_rate = math.exp(annual_rate_decimal) - 1
+        rate = effective_rate / 12
+        payment = principal * rate * (1 + rate)**months / ((1 + rate)**months - 1)
+    else:
+        raise ValueError("Invalid compounding interval. Choose 'monthly', 'weekly', 'daily', or 'continuously'.")
+    
+    total_payment = payment * months
+    
+    return payment, total_payment, years
+
+#Example:
+principal = 300000  
+annual_rate = 5  
+years = 30  
+compounding = 'monthly' 
+
+monthly_payment, total_payment, total_years = mortgage_calculator(principal, annual_rate, years, compounding)
+
+print(f"Monthly Payment: Rs.{monthly_payment:.2f}")
+print(f"Total Payment Over {total_years} Years: Rs.{total_payment:.2f}")
+

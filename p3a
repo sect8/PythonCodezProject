@@ -1,0 +1,14 @@
+
+def ask():
+    cost = float(input("Cost per m^2: "))
+    width = float(input("Width in meters: "))
+    height = float(input("Height in meters: "))
+    return cost, width, height
+
+
+def main():
+    a,b,c = ask()
+    print("The cost is: %.2f $" % (float(a * b * c)))
+
+if __name__ == "__main__":
+    main()

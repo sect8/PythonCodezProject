@@ -1,0 +1,18 @@
+from pytube import YouTube
+
+class Downloader():
+    def __init__(self):
+        pass
+    def download_video(self,link):
+        video = YouTube(link)
+        streams = video.streams.first()
+        streams.download("D:\pydownloadtest")
+
+def main():
+    d = Downloader()
+    link = input("Enter your Link:\n")
+    print("Downloading your video...")
+    d.download_video(link)
+    print("Video downloaded.")
+
+main()   

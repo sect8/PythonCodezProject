@@ -1,0 +1,23 @@
+import requests
+URL = 'http://data.fixer.io/api/latest?access_key=e542e73a26fee6de93ce3d7c069eb54b'
+
+def currency_conversion():
+    from_currency = input('From Currency :')
+    to_currency   = input('To Currency   :')
+    amount    = int(input('Amount        :'))
+    response = requests.get(URL)
+    rate = response.json()['rates'][from_currency]
+    amount_in_EUR = amount/rate
+    amount = amount_in_EUR*(response.json()['rates'][to_currency])
+    amount = round(amount,2)
+    print(amount)
+    again = input('Again ? :')
+    if again == 'yes':
+        currency_conversion()
+
+
+currency_conversion()
+
+
+
+

@@ -1,0 +1,49 @@
+def calculate_change(cost, amount_given):
+    
+    if amount_given < cost:
+        return "Error: Amount given is less than the cost."
+
+    # Calculate the total change
+    change = amount_given - cost
+
+    
+    denominations = [2000, 500, 200, 100, 50, 20, 10, 5, 2, 1, 0.5, 0.25, 0.1, 0.05, 0.01]
+    result = {}
+
+    
+    for denom in denominations:
+        count = change // denom
+        if count > 0:
+            result[denom] = int(count)  # Cast count to integer for whole units
+        change %= denom
+
+    return result
+
+# User Input
+def get_user_input():
+    try:
+        cost = float(input("Enter the cost in INR: "))
+        amount_given = float(input("Enter the amount given in INR: "))
+        return cost, amount_given
+    except ValueError:
+        return None, None
+
+# Change breakdown
+def display_change(change):
+    if isinstance(change, str):
+        print(change)
+    else:
+        print("Change breakdown:")
+        for denom, count in change.items():
+            if denom >= 1:
+                print(f"INR {denom}: {count}")
+            else:
+                print(f"Paisa {int(denom * 100)}: {count}")
+
+if __name__ == "__main__":
+    cost, amount_given = get_user_input()
+    if cost is not None and amount_given is not None:
+        change = calculate_change(cost, amount_given)
+        display_change(change)
+    else:
+        print("Invalid input. Please enter valid numbers.")

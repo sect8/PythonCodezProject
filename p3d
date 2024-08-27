@@ -1,0 +1,80 @@
+
+
+# Length conversion
+def length_conversion(value, from_unit, to_unit):
+    length_units = {
+        'm': 1,
+        'cm': 100,
+        'mm': 1000,
+        'km': 0.001,
+        'in': 39.3701,
+        'ft': 3.28084,
+        'yd': 1.09361,
+        'mi': 0.000621371
+    }
+    
+    return value * length_units[to_unit] / length_units[from_unit]
+
+# Weight conversion
+def weight_conversion(value, from_unit, to_unit):
+    weight_units = {
+        'kg': 1,
+        'g': 1000,
+        'mg': 1000000,
+        'lb': 2.20462,
+        'oz': 35.274
+    }
+    
+    return value * weight_units[to_unit] / weight_units[from_unit]
+
+# Temperature conversion
+def temperature_conversion(value, from_unit, to_unit):
+    if from_unit == 'C':
+        if to_unit == 'F':
+            return (value * 9/5) + 32
+        elif to_unit == 'K':
+            return value + 273.15
+    elif from_unit == 'F':
+        if to_unit == 'C':
+            return (value - 32) * 5/9
+        elif to_unit == 'K':
+            return (value - 32) * 5/9 + 273.15
+    elif from_unit == 'K':
+        if to_unit == 'C':
+            return value - 273.15
+        elif to_unit == 'F':
+            return (value - 273.15) * 9/5 + 32
+
+    return value  
+
+# Main conversion function
+def unit_conversion(value, from_unit, to_unit):
+    try:
+        # Determine the type of conversion based on units
+        if from_unit in ['m', 'cm', 'mm', 'km', 'in', 'ft', 'yd', 'mi']:
+            return length_conversion(value, from_unit, to_unit)
+        elif from_unit in ['kg', 'g', 'mg', 'lb', 'oz']:
+            return weight_conversion(value, from_unit, to_unit)
+        elif from_unit in ['C', 'F', 'K']:
+            return temperature_conversion(value, from_unit, to_unit)
+        else:
+            return "Unsupported unit type."
+    except KeyError:
+        return "Conversion not possible for these units."
+
+# User input
+def get_user_input():
+    print("Supported unit types:")
+    print("Length: 'm', 'cm', 'mm', 'km', 'in', 'ft', 'yd', 'mi'")
+    print("Weight: 'kg', 'g', 'mg', 'lb', 'oz'")
+    print("Temperature: 'C', 'F', 'K'")
+    from_unit = input("Enter the unit you are converting from: ").strip()
+    to_unit = input("Enter the unit you are converting to: ").strip()
+    value = float(input(f"Enter the value in {from_unit}: "))
+    return value, from_unit, to_unit
+
+if __name__ == "__main__":
+    value, from_unit, to_unit = get_user_input()
+    result = unit_conversion(value, from_unit, to_unit)
+    print(f"{value} {from_unit} is equal to {result} {to_unit}")
+
