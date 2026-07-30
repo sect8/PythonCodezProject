@@ -1,6 +1,5 @@
 # PythonCodezProject
-Just a trial test on some concepts I have learnt.
-It has been divided into 3 projects whose contents are as follows:-
+Just my python final assessment projects:-
 
 PROJECT 1:
 1. LEAP YEAR DETECTION SYSTEM.
@@ -17,5 +16,5 @@ PROJECT 2:
 PROJECT 3:
 1.	COST OF TILE TO COVER W x H FLOOR.
 2.	MORTGAGE CALCULATOR.
-3.	CHANGE RETURN PORGRAM.
+3.	CHANGE RETURN PROGRAM.
 4.	UNIT CONVERTER (temp, currency, volume).
